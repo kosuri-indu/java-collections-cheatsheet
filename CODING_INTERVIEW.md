@@ -1,87 +1,137 @@
-## 8. Common Coding Patterns & Interview Snippets
+# Java Coding Interview Patterns & Tips
 
-### List
+This guide covers common patterns, tips, and best practices for Java coding interviews, especially when working with collections and data structures.
+
+## 1. Common Coding Patterns
+
+### 1.1. Sliding Window
+
+Efficiently process subarrays or substrings of a fixed or variable size.
 
 ```java
-// Iterate with index
-for (int i = 0; i < list.size(); i++) {
-	System.out.println(list.get(i));
+int left = 0;
+for (int right = 0; right < arr.length; right++) {
+		// Expand window
+		while (/* window too big or invalid */) {
+				left++;
+		}
+		// Process window [left, right]
 }
-// Iterate with for-each
-for (String s : list) {
-	System.out.println(s);
-}
-// Remove all elements matching a condition
-list.removeIf(x -> x < 0);
 ```
 
-### Set
+### 1.2. Two Pointers
+
+Used for searching pairs in a sorted array or removing duplicates.
 
 ```java
-// Remove duplicates from a list
-List<Integer> nums = Arrays.asList(1, 2, 2, 3);
-Set<Integer> unique = new HashSet<>(nums);
-// Check if two sets have common elements
-set1.retainAll(set2); // modifies set1 to keep only common elements
+int i = 0, j = arr.length - 1;
+while (i < j) {
+		int sum = arr[i] + arr[j];
+		if (sum == target) break;
+		else if (sum < target) i++;
+		else j--;
+}
 ```
 
-### Queue
+### 1.3. Fast & Slow Pointers (Cycle Detection)
 
 ```java
-// BFS template
-Queue<Integer> q = new LinkedList<>();
-q.offer(start);
+ListNode slow = head, fast = head;
+while (fast != null && fast.next != null) {
+		slow = slow.next;
+		fast = fast.next.next;
+		if (slow == fast) return true;
+}
+```
+
+### 1.4. HashMap for Counting/Frequency
+
+```java
+Map<Character, Integer> freq = new HashMap<>();
+for (char c : s.toCharArray()) {
+		freq.put(c, freq.getOrDefault(c, 0) + 1);
+}
+```
+
+### 1.5. Stack for Parentheses/Expression Problems
+
+```java
+Stack<Character> stack = new Stack<>();
+for (char c : s.toCharArray()) {
+		if (c == '(') stack.push(c);
+		else if (c == ')' && !stack.isEmpty()) stack.pop();
+		else return false;
+}
+return stack.isEmpty();
+```
+
+### 1.6. BFS/DFS with Queue/Stack
+
+```java
+// BFS
+Queue<TreeNode> q = new LinkedList<>();
+q.offer(root);
 while (!q.isEmpty()) {
-	int node = q.poll();
-	// process node
+		TreeNode node = q.poll();
+		// process node
+		if (node.left != null) q.offer(node.left);
+		if (node.right != null) q.offer(node.right);
+}
+
+// DFS
+Stack<TreeNode> st = new Stack<>();
+st.push(root);
+while (!st.isEmpty()) {
+		TreeNode node = st.pop();
+		// process node
+		if (node.right != null) st.push(node.right);
+		if (node.left != null) st.push(node.left);
 }
 ```
 
-### Deque
+## 2. General Interview Tips
 
-```java
-// Sliding window maximum
-Deque<Integer> dq = new ArrayDeque<>();
-for (int i = 0; i < n; i++) {
-	while (!dq.isEmpty() && arr[dq.peekLast()] <= arr[i]) dq.pollLast();
-	dq.offerLast(i);
-	if (dq.peekFirst() <= i - k) dq.pollFirst();
-	// arr[dq.peekFirst()] is max in window
-}
-```
+- Always clarify requirements and edge cases with the interviewer.
+- Use meaningful variable names and write clean, readable code.
+- Start with a brute-force solution, then optimize.
+- Use Java interfaces (`List`, `Map`, `Set`) for variable declarations.
+- Know the time and space complexity of your approach.
+- Test your code with sample and edge cases.
+- Communicate your thought process clearly.
 
-### Stack
+## 3. Useful Java Snippets
 
-```java
-// Valid parentheses
-Stack<Character> st = new Stack<>();
-for (char ch : s.toCharArray()) {
-	if (ch == '(') st.push(ch);
-	else if (ch == ')' && !st.isEmpty()) st.pop();
-	else return false;
-}
-return st.isEmpty();
-```
+- **Convert List to Array:**
+  ```java
+  List<Integer> list = ...;
+  Integer[] arr = list.toArray(new Integer[0]);
+  ```
+- **Convert Array to List:**
+  ```java
+  int[] arr = ...;
+  List<Integer> list = Arrays.stream(arr).boxed().collect(Collectors.toList());
+  ```
+- **Sort with Comparator:**
+  ```java
+  Collections.sort(list, (a, b) -> b - a); // descending
+  ```
+- **PriorityQueue as Max Heap:**
+  ```java
+  PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+  ```
+- **StringBuilder for Efficient String Concatenation:**
+  ```java
+  StringBuilder sb = new StringBuilder();
+  sb.append("a");
+  sb.append("b");
+  String result = sb.toString();
+  ```
 
-### Map
+## 4. Recommended Practice
 
-```java
-// Frequency count (characters, words, etc.)
-map.put(key, map.getOrDefault(key, 0) + 1);
-// Iterate over entries
-for (Map.Entry<String, Integer> entry : map.entrySet()) {
-	System.out.println(entry.getKey() + ": " + entry.getValue());
-}
-// Grouping by value
-Map<Integer, List<String>> groups = new HashMap<>();
-groups.computeIfAbsent(val, k -> new ArrayList<>()).add(str);
-```
+- Practice LeetCode, HackerRank, or CodeSignal problems.
+- Review common data structures and algorithms.
+- Write code on paper or a whiteboard to simulate interview conditions.
+- Time yourself to get used to coding under pressure.
 
-### PriorityQueue
-
-```java
-// Max heap
-PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
-// Custom comparator
-PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[1] - b[1]);
-```
+Good luck with your interviews!

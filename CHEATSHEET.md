@@ -90,37 +90,52 @@ A Queue is a collection for holding elements prior to processing (FIFO).
 ### Declaration & Instantiation
 
 ```java
+// LinkedList can be used as Queue, Deque, or List
 Queue<Integer> linkedListQueue = new LinkedList<>();
 Queue<Integer> arrayDequeQueue = new ArrayDeque<>();
+LinkedList<Integer> ll = new LinkedList<>(); // for all List, Queue, Deque methods
 ```
 
 ### Common Methods
 
-| Method     | Description    | LinkedList Time | ArrayDeque Time | Example     |
-| ---------- | -------------- | --------------- | --------------- | ----------- |
-| offer(E e) | Add to queue   | O(1)            | O(1)            | q.offer(1)  |
-| poll()     | Remove head    | O(1)            | O(1)            | q.poll()    |
-| peek()     | View head      | O(1)            | O(1)            | q.peek()    |
-| isEmpty()  | Check if empty | O(1)            | O(1)            | q.isEmpty() |
+| Method         | Description                | LinkedList Time | ArrayDeque Time | Example                |
+| -------------- |---------------------------|-----------------|-----------------|------------------------|
+| offer(E e)     | Add to queue (preferred)  | O(1)            | O(1)            | q.offer(1)             |
+| add(E e)       | Add to queue (throws ex)  | O(1)            | O(1)            | q.add(1)               |
+| poll()         | Remove head (preferred)   | O(1)            | O(1)            | q.poll()               |
+| remove()       | Remove head (throws ex)   | O(1)            | O(1)            | q.remove()             |
+| peek()         | View head                 | O(1)            | O(1)            | q.peek()               |
+| isEmpty()      | Check if empty            | O(1)            | O(1)            | q.isEmpty()            |
+| addAll(c)      | Add all elements          | O(m)            | O(m)            | q.addAll(list)         |
+| removeAll(c)   | Remove all in collection  | O(n*m)          | O(n*m)          | q.removeAll(list)      |
 
 ### Example
 
 ```java
 Queue<Integer> q = new LinkedList<>();
 q.offer(1);
-q.offer(2);
+q.add(2);
 System.out.println(q.poll()); // 1
 
 Queue<Integer> q2 = new ArrayDeque<>();
 q2.offer(10);
-q2.offer(20);
+q2.add(20);
 System.out.println(q2.poll()); // 10
+
+// Add all elements from a list
+List<Integer> nums = Arrays.asList(3, 4, 5);
+q.addAll(nums);
+// Remove all elements in another collection
+q.removeAll(nums);
 ```
 
 **Note:**
 
 - `offer` and `poll` are preferred over `add` and `remove` as they do not throw exceptions on failure.
+- `add` and `remove` throw exceptions if the operation fails (e.g., empty queue).
+- `addAll` and `removeAll` are useful for batch operations.
 - `ArrayDeque` is usually faster than `LinkedList` for queue operations.
+- `LinkedList` implements List, Queue, and Deque interfaces, so it can be used flexibly.
 
 ## 4. Deque (Double-Ended Queue)
 
@@ -346,8 +361,6 @@ Integer[] arr2 = list.toArray(new Integer[0]);
 // Convert array to list
 List<Integer> list2 = Arrays.asList(arr2);
 ```
-
-### Comparator & Comparable
 
 ## 9. Comparator & Comparable
 

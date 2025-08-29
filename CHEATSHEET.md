@@ -2,6 +2,9 @@
 
 This cheat sheet covers the most commonly used data structures in Java Collections, with their main methods, time complexities, and usage examples. Use this as a quick reference for coding and interviews.
 
+**Note on Amortized Time:**
+Amortized time means that while a single operation might occasionally take longer, the average time per operation over a sequence of operations is as stated. For example, `ArrayList.add()` is O(1) amortized because most adds are O(1), but sometimes resizing the array takes O(n).
+
 ## 1. List
 
 ### What is it?
@@ -17,15 +20,15 @@ List<Integer> linkedList = new LinkedList<>();
 
 ### Common Methods
 
-| Method             | Description               | ArrayList Time | LinkedList Time |
-| ------------------ | ------------------------- | -------------- | --------------- |
-| add(E e)           | Add element               | O(1) amortized | O(1)            |
-| add(int idx, E e)  | Add at index              | O(n)           | O(n)            |
-| get(int idx)       | Get element at index      | O(1)           | O(n)            |
-| remove(int idx)    | Remove at index           | O(n)           | O(n)            |
-| contains(Object o) | Check if contains element | O(n)           | O(n)            |
-| size()             | Get size                  | O(1)           | O(1)            |
-| clear()            | Remove all elements       | O(n)           | O(n)            |
+| Method             | Description               | ArrayList Time | LinkedList Time | Example            |
+| ------------------ | ------------------------- | -------------- | --------------- | ------------------ |
+| add(E e)           | Add element               | O(1) amortized | O(1)            | list.add("a")      |
+| add(int idx, E e)  | Add at index              | O(n)           | O(n)            | list.add(1, "a")   |
+| get(int idx)       | Get element at index      | O(1)           | O(n)            | list.get(0)        |
+| remove(int idx)    | Remove at index           | O(n)           | O(n)            | list.remove(0)     |
+| contains(Object o) | Check if contains element | O(n)           | O(n)            | list.contains("a") |
+| size()             | Get size                  | O(1)           | O(1)            | list.size()        |
+| clear()            | Remove all elements       | O(n)           | O(n)            | list.clear()       |
 
 ### Example
 
@@ -57,13 +60,13 @@ Set<Integer> treeSet = new TreeSet<>();
 
 ### Common Methods
 
-| Method             | Description               | HashSet Time | LinkedHashSet Time | TreeSet Time |
-| ------------------ | ------------------------- | ------------ | ------------------ | ------------ |
-| add(E e)           | Add element               | O(1)         | O(1)               | O(log n)     |
-| remove(Object o)   | Remove element            | O(1)         | O(1)               | O(log n)     |
-| contains(Object o) | Check if contains element | O(1)         | O(1)               | O(log n)     |
-| size()             | Get size                  | O(1)         | O(1)               | O(1)         |
-| clear()            | Remove all elements       | O(n)         | O(n)               | O(n)         |
+| Method             | Description               | HashSet Time | LinkedHashSet Time | TreeSet Time | Example         |
+| ------------------ | ------------------------- | ------------ | ------------------ | ------------ | --------------- |
+| add(E e)           | Add element               | O(1)         | O(1)               | O(log n)     | set.add(1)      |
+| remove(Object o)   | Remove element            | O(1)         | O(1)               | O(log n)     | set.remove(1)   |
+| contains(Object o) | Check if contains element | O(1)         | O(1)               | O(log n)     | set.contains(1) |
+| size()             | Get size                  | O(1)         | O(1)               | O(1)         | set.size()      |
+| clear()            | Remove all elements       | O(n)         | O(n)               | O(n)         | set.clear()     |
 
 ### Example
 
@@ -93,12 +96,12 @@ Queue<Integer> arrayDequeQueue = new ArrayDeque<>();
 
 ### Common Methods
 
-| Method      | Description         | LinkedList Time | ArrayDeque Time |
-|-------------|--------------------|-----------------|-----------------|
-| offer(E e)  | Add to queue       | O(1)            | O(1)            |
-| poll()      | Remove head        | O(1)            | O(1)            |
-| peek()      | View head          | O(1)            | O(1)            |
-| isEmpty()   | Check if empty     | O(1)            | O(1)            |
+| Method     | Description    | LinkedList Time | ArrayDeque Time | Example     |
+| ---------- | -------------- | --------------- | --------------- | ----------- |
+| offer(E e) | Add to queue   | O(1)            | O(1)            | q.offer(1)  |
+| poll()     | Remove head    | O(1)            | O(1)            | q.poll()    |
+| peek()     | View head      | O(1)            | O(1)            | q.peek()    |
+| isEmpty()  | Check if empty | O(1)            | O(1)            | q.isEmpty() |
 
 ### Example
 
@@ -115,6 +118,7 @@ System.out.println(q2.poll()); // 10
 ```
 
 **Note:**
+
 - `offer` and `poll` are preferred over `add` and `remove` as they do not throw exceptions on failure.
 - `ArrayDeque` is usually faster than `LinkedList` for queue operations.
 
@@ -132,14 +136,14 @@ Deque<Integer> deque = new ArrayDeque<>();
 
 ### Common Methods
 
-| Method        | Description       | Time Complexity |
-| ------------- | ----------------- | --------------- |
-| addFirst(E e) | Add to front      | O(1)            |
-| addLast(E e)  | Add to end        | O(1)            |
-| removeFirst() | Remove from front | O(1)            |
-| removeLast()  | Remove from end   | O(1)            |
-| peekFirst()   | View front        | O(1)            |
-| peekLast()    | View end          | O(1)            |
+| Method        | Description       | Time Complexity | Example             |
+| ------------- | ----------------- | --------------- | ------------------- |
+| addFirst(E e) | Add to front      | O(1)            | deque.addFirst(1)   |
+| addLast(E e)  | Add to end        | O(1)            | deque.addLast(2)    |
+| removeFirst() | Remove from front | O(1)            | deque.removeFirst() |
+| removeLast()  | Remove from end   | O(1)            | deque.removeLast()  |
+| peekFirst()   | View front        | O(1)            | deque.peekFirst()   |
+| peekLast()    | View end          | O(1)            | deque.peekLast()    |
 
 ### Example
 
@@ -165,12 +169,12 @@ Deque<Integer> stack2 = new ArrayDeque<>();
 
 ### Common Methods
 
-| Method    | Description     | Time Complexity |
-| --------- | --------------- | --------------- |
-| push(E e) | Add to top      | O(1)            |
-| pop()     | Remove from top | O(1)            |
-| peek()    | View top        | O(1)            |
-| isEmpty() | Check if empty  | O(1)            |
+| Method    | Description     | Stack Time | ArrayDeque Time | Example                           |
+| --------- | --------------- | ---------- | --------------- | --------------------------------- |
+| push(E e) | Add to top      | O(1)       | O(1)            | stack.push(1) / deque.push(1)     |
+| pop()     | Remove from top | O(1)       | O(1)            | stack.pop() / deque.pop()         |
+| peek()    | View top        | O(1)       | O(1)            | stack.peek() / deque.peek()       |
+| isEmpty() | Check if empty  | O(1)       | O(1)            | stack.isEmpty() / deque.isEmpty() |
 
 ### Example
 
@@ -201,14 +205,14 @@ Map<String, Integer> treeMap = new TreeMap<>();
 
 ### Common Methods
 
-| Method                | Description         | HashMap Time | LinkedHashMap Time | TreeMap Time |
-|-----------------------|--------------------|--------------|--------------------|--------------|
-| put(K key, V value)   | Add or update value| O(1)         | O(1)               | O(log n)     |
-| get(Object key)       | Get value by key   | O(1)         | O(1)               | O(log n)     |
-| remove(Object key)    | Remove by key      | O(1)         | O(1)               | O(log n)     |
-| containsKey(Object k) | Check if key exists| O(1)         | O(1)               | O(log n)     |
-| keySet()              | Get all keys       | O(n)         | O(n)               | O(n)         |
-| values()              | Get all values     | O(n)         | O(n)               | O(n)         |
+| Method                | Description         | HashMap Time | LinkedHashMap Time | TreeMap Time | Example              |
+| --------------------- | ------------------- | ------------ | ------------------ | ------------ | -------------------- |
+| put(K key, V value)   | Add or update value | O(1)         | O(1)               | O(log n)     | map.put("a", 1)      |
+| get(Object key)       | Get value by key    | O(1)         | O(1)               | O(log n)     | map.get("a")         |
+| remove(Object key)    | Remove by key       | O(1)         | O(1)               | O(log n)     | map.remove("a")      |
+| containsKey(Object k) | Check if key exists | O(1)         | O(1)               | O(log n)     | map.containsKey("a") |
+| keySet()              | Get all keys        | O(n)         | O(n)               | O(n)         | map.keySet()         |
+| values()              | Get all values      | O(n)         | O(n)               | O(n)         | map.values()         |
 
 ### Example
 
@@ -228,6 +232,7 @@ System.out.println(freq); // {h=1, e=1, l=2, o=1}
 ```
 
 **Note:**
+
 - `HashMap` is unordered, `LinkedHashMap` maintains insertion order, `TreeMap` is sorted by key.
 
 ## 7. PriorityQueue
@@ -239,16 +244,19 @@ A PriorityQueue is a queue where elements are ordered by priority.
 ### Declaration & Instantiation
 
 ```java
-PriorityQueue<Integer> pq = new PriorityQueue<>();
+// Min-heap (default)
+PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+// Max-heap
+PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
 ```
 
 ### Common Methods
 
-| Method     | Description    | Time Complexity |
-| ---------- | -------------- | --------------- |
-| offer(E e) | Add element    | O(log n)        |
-| poll()     | Remove min/max | O(log n)        |
-| peek()     | View min/max   | O(1)            |
+| Method     | Description    | Time Complexity | Example     |
+| ---------- | -------------- | --------------- | ----------- |
+| offer(E e) | Add element    | O(log n)        | pq.offer(5) |
+| poll()     | Remove min/max | O(log n)        | pq.poll()   |
+| peek()     | View min/max   | O(1)            | pq.peek()   |
 
 ### Example
 
@@ -263,107 +271,21 @@ System.out.println(pq.poll()); // 1
 
 - By default, it is a min-heap. Use a custom comparator for max-heap.
 
-This cheat sheet is a quick reference. For more details, check the [Java documentation](https://docs.oracle.com/javase/8/docs/api/java/util/package-summary.html).
-
----
-
-## 8. Common Coding Patterns & Interview Snippets
-
-### List
-```java
-// Iterate with index
-for (int i = 0; i < list.size(); i++) {
-	System.out.println(list.get(i));
-}
-// Iterate with for-each
-for (String s : list) {
-	System.out.println(s);
-}
-// Remove all elements matching a condition
-list.removeIf(x -> x < 0);
-```
-
-### Set
-```java
-// Remove duplicates from a list
-List<Integer> nums = Arrays.asList(1, 2, 2, 3);
-Set<Integer> unique = new HashSet<>(nums);
-// Check if two sets have common elements
-set1.retainAll(set2); // modifies set1 to keep only common elements
-```
-
-### Queue
-```java
-// BFS template
-Queue<Integer> q = new LinkedList<>();
-q.offer(start);
-while (!q.isEmpty()) {
-	int node = q.poll();
-	// process node
-}
-```
-
-### Deque
-```java
-// Sliding window maximum
-Deque<Integer> dq = new ArrayDeque<>();
-for (int i = 0; i < n; i++) {
-	while (!dq.isEmpty() && arr[dq.peekLast()] <= arr[i]) dq.pollLast();
-	dq.offerLast(i);
-	if (dq.peekFirst() <= i - k) dq.pollFirst();
-	// arr[dq.peekFirst()] is max in window
-}
-```
-
-### Stack
-```java
-// Valid parentheses
-Stack<Character> st = new Stack<>();
-for (char ch : s.toCharArray()) {
-	if (ch == '(') st.push(ch);
-	else if (ch == ')' && !st.isEmpty()) st.pop();
-	else return false;
-}
-return st.isEmpty();
-```
-
-### Map
-```java
-// Frequency count (characters, words, etc.)
-map.put(key, map.getOrDefault(key, 0) + 1);
-// Iterate over entries
-for (Map.Entry<String, Integer> entry : map.entrySet()) {
-	System.out.println(entry.getKey() + ": " + entry.getValue());
-}
-// Grouping by value
-Map<Integer, List<String>> groups = new HashMap<>();
-groups.computeIfAbsent(val, k -> new ArrayList<>()).add(str);
-```
-
-### PriorityQueue
-```java
-// Max heap
-PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
-// Custom comparator
-PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[1] - b[1]);
-```
-
----
-
-## 9. Utilities & Useful Functions
+## 8. Utilities & Useful Functions
 
 ### Arrays Class
 
-| Method                        | Description                                 |
-|-------------------------------|---------------------------------------------|
-| Arrays.sort(arr)              | Sorts the array in ascending order          |
-| Arrays.sort(arr, cmp)         | Sorts array with custom comparator          |
-| Arrays.toString(arr)          | Returns string representation of array      |
-| Arrays.equals(arr1, arr2)     | Checks if two arrays are equal              |
-| Arrays.fill(arr, val)         | Fills array with given value                |
-| Arrays.binarySearch(arr, key) | Binary search (sorted array required)       |
+| Method                        | Description                            | Time Complexity | Example                     |
+| ----------------------------- | -------------------------------------- | --------------- | --------------------------- |
+| Arrays.sort(arr)              | Sorts the array in ascending order     | O(n log n)      | Arrays.sort(arr)            |
+| Arrays.sort(arr, cmp)         | Sorts array with custom comparator     | O(n log n)      | Arrays.sort(arr, cmp)       |
+| Arrays.toString(arr)          | Returns string representation of array | O(n)            | Arrays.toString(arr)        |
+| Arrays.equals(arr1, arr2)     | Checks if two arrays are equal         | O(n)            | Arrays.equals(a, b)         |
+| Arrays.fill(arr, val)         | Fills array with given value           | O(n)            | Arrays.fill(arr, 5)         |
+| Arrays.binarySearch(arr, key) | Binary search (sorted array required)  | O(log n)        | Arrays.binarySearch(arr, 5) |
 
 #### Examples
+
 ```java
 int[] arr = {3, 1, 2};
 Arrays.sort(arr); // [1, 2, 3]
@@ -383,18 +305,19 @@ int idx = Arrays.binarySearch(arr, 5); // returns index if found, else (-(insert
 
 ### Collections Class
 
-| Method                              | Description                                 |
-|-------------------------------------|---------------------------------------------|
-| Collections.sort(list)              | Sorts list in ascending order               |
-| Collections.sort(list, cmp)         | Sorts list with custom comparator           |
-| Collections.reverse(list)           | Reverses the list                           |
-| Collections.shuffle(list)           | Randomly shuffles the list                  |
-| Collections.binarySearch(list, key) | Binary search (sorted list required)        |
-| Collections.max(list)               | Returns max element                         |
-| Collections.min(list)               | Returns min element                         |
-| Collections.frequency(list, obj)    | Counts occurrences of obj in list           |
+| Method                              | Description                          | Time Complexity | Example                           |
+| ----------------------------------- | ------------------------------------ | --------------- | --------------------------------- |
+| Collections.sort(list)              | Sorts list in ascending order        | O(n log n)      | Collections.sort(list)            |
+| Collections.sort(list, cmp)         | Sorts list with custom comparator    | O(n log n)      | Collections.sort(list, cmp)       |
+| Collections.reverse(list)           | Reverses the list                    | O(n)            | Collections.reverse(list)         |
+| Collections.shuffle(list)           | Randomly shuffles the list           | O(n)            | Collections.shuffle(list)         |
+| Collections.binarySearch(list, key) | Binary search (sorted list required) | O(log n)        | Collections.binarySearch(list, 2) |
+| Collections.max(list)               | Returns max element                  | O(n)            | Collections.max(list)             |
+| Collections.min(list)               | Returns min element                  | O(n)            | Collections.min(list)             |
+| Collections.frequency(list, obj)    | Counts occurrences of obj in list    | O(n)            | Collections.frequency(list, 2)    |
 
 #### Examples
+
 ```java
 List<Integer> list = Arrays.asList(3, 1, 2);
 Collections.sort(list); // [1, 2, 3]
@@ -426,7 +349,10 @@ List<Integer> list2 = Arrays.asList(arr2);
 
 ### Comparator & Comparable
 
-#### Comparable (Natural Ordering)
+## 9. Comparator & Comparable
+
+### Comparable (Natural Ordering)
+
 Implement `Comparable<T>` and override `compareTo()` for custom objects.
 
 ```java
@@ -438,21 +364,21 @@ class Person implements Comparable<Person> {
 		return Integer.compare(this.age, other.age); // ascending
 	}
 }
-
 List<Person> people = Arrays.asList(new Person(30), new Person(20));
 Collections.sort(people); // sorts by age ascending
 ```
 
-#### Comparator (Custom Ordering)
+### Comparator (Custom Ordering)
+
 Pass a Comparator to sort or data structures.
 
 ```java
 // Sort by descending age
 Collections.sort(people, (a, b) -> b.age - a.age);
-
 // For PriorityQueue
 PriorityQueue<Person> pq = new PriorityQueue<>((a, b) -> a.age - b.age); // min-heap by age
 ```
 
 **Note:**
+
 - Use `Comparator.comparing(Person::getAge)` for more readable code in Java 8+.

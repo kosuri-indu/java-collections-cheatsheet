@@ -98,16 +98,16 @@ LinkedList<Integer> ll = new LinkedList<>(); // for all List, Queue, Deque metho
 
 ### Common Methods
 
-| Method         | Description                | LinkedList Time | ArrayDeque Time | Example                |
-| -------------- |---------------------------|-----------------|-----------------|------------------------|
-| offer(E e)     | Add to queue (preferred)  | O(1)            | O(1)            | q.offer(1)             |
-| add(E e)       | Add to queue (throws ex)  | O(1)            | O(1)            | q.add(1)               |
-| poll()         | Remove head (preferred)   | O(1)            | O(1)            | q.poll()               |
-| remove()       | Remove head (throws ex)   | O(1)            | O(1)            | q.remove()             |
-| peek()         | View head                 | O(1)            | O(1)            | q.peek()               |
-| isEmpty()      | Check if empty            | O(1)            | O(1)            | q.isEmpty()            |
-| addAll(c)      | Add all elements          | O(m)            | O(m)            | q.addAll(list)         |
-| removeAll(c)   | Remove all in collection  | O(n*m)          | O(n*m)          | q.removeAll(list)      |
+| Method       | Description              | LinkedList Time | ArrayDeque Time | Example           |
+| ------------ | ------------------------ | --------------- | --------------- | ----------------- |
+| offer(E e)   | Add to queue (preferred) | O(1)            | O(1)            | q.offer(1)        |
+| add(E e)     | Add to queue (throws ex) | O(1)            | O(1)            | q.add(1)          |
+| poll()       | Remove head (preferred)  | O(1)            | O(1)            | q.poll()          |
+| remove()     | Remove head (throws ex)  | O(1)            | O(1)            | q.remove()        |
+| peek()       | View head                | O(1)            | O(1)            | q.peek()          |
+| isEmpty()    | Check if empty           | O(1)            | O(1)            | q.isEmpty()       |
+| addAll(c)    | Add all elements         | O(m)            | O(m)            | q.addAll(list)    |
+| removeAll(c) | Remove all in collection | O(n\*m)         | O(n\*m)         | q.removeAll(list) |
 
 ### Example
 
@@ -360,6 +360,44 @@ Integer[] arr2 = list.toArray(new Integer[0]);
 
 // Convert array to list
 List<Integer> list2 = Arrays.asList(arr2);
+```
+
+### StringBuilder (Efficient String Manipulation)
+
+#### Declaration
+```java
+StringBuilder sb = new StringBuilder();
+```
+
+| Method                | Description                        | Time Complexity | Example                      |
+|-----------------------|------------------------------------|-----------------|------------------------------|
+| StringBuilder()       | Create new builder                 | O(1)            | new StringBuilder()           |
+| append(str)           | Add string/char/int to end         | O(1) amortized  | sb.append("abc")             |
+| insert(idx, str)      | Insert at index                    | O(n)            | sb.insert(1, "x")            |
+| delete(start, end)    | Remove substring                   | O(n)            | sb.delete(1, 3)               |
+| deleteCharAt(idx)     | Remove char at index               | O(n)            | sb.deleteCharAt(2)            |
+| charAt(idx)           | Get char at index                  | O(1)            | sb.charAt(0)                  |
+| setCharAt(idx, ch)    | Set char at index                  | O(1)            | sb.setCharAt(0, 'X')          |
+| substring(start, end) | Get substring                      | O(n)            | sb.substring(1, 3)            |
+| reverse()             | Reverse the string                 | O(n)            | sb.reverse()                  |
+| toString()            | Convert to String                  | O(n)            | sb.toString()                 |
+| length()              | Get length                         | O(1)            | sb.length()                   |
+
+#### Example
+```java
+StringBuilder sb = new StringBuilder();
+sb.append("Hello");
+sb.append(" ");
+sb.append("World");
+sb.insert(5, ",");
+sb.delete(5, 6);
+sb.deleteCharAt(0);
+char c = sb.charAt(0);
+sb.setCharAt(0, 'X');
+String sub = sb.substring(0, 5);
+sb.reverse();
+String result = sb.toString();
+System.out.println(result); // "dlroW olleH"
 ```
 
 ## 9. Comparator & Comparable
